@@ -2,8 +2,6 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-export TERM=xterm-256color
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -58,6 +56,7 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+# show what branch I'm in if in a git repo
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
@@ -100,18 +99,6 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias lla='ls -la'
-
-# xclip
-alias xclip="xclip -selection c"
-# alloy
-alias alloy='java -jar ~/Documents/RIT/SWEN\ 220/alloy4.2.jar'
-# jspin
-alias jspin='java -jar ~/spin/jspin.jar'
-# I'm lazy and want shortcuts just because
-alias swen261='cd ~/Documents/RIT/SWEN\ 261/team-project-2175-swen-261-11-c-sea'
-alias swen220='cd ~/Documents/RIT/SWEN\ 220/'
-alias nitron='ssh jbd7165@nitron.se.rit.edu'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -136,9 +123,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-# tmux !! :)
-if command -v tmux>/dev/null; then
-  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
-fi
-alias config='/usr/bin/git --git-dir=/home/jeremy/.cfg/ --work-tree=/home/jeremy'
